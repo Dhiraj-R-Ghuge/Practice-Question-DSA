@@ -1,0 +1,745 @@
+Target Sum :(brute force approach ) for begainer
+1)Find the total number of pairs in the array who the sum is equal to the given value x
+[4,6,3,5,8,2] target = 7
+
+import java.util.*;
+class Main {
+   static int  sum(int arr[],int x){
+        int n=arr.length;
+        int ans=0;
+        for(int i=0; i<n; i++){
+            for(int j=i+1; j<n; j++){
+                if(arr[i]+arr[j]==x){
+                   System.out.println("Pair found at indices: " + i + " and " + j +" (Values: " + arr[i] + " + " + arr[j] + ")");
+                    ans++;
+                }
+            }
+        }
+        return ans;
+        }
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int arr[]=new int [n];
+        for(int i=0; i<n; i++){
+            arr[i]=sc.nextInt();
+        }
+         System.out.println("target value");
+        int  x=sc.nextInt();
+         System.out.println(sum(arr,x));
+        
+    }
+}
+
+Array manipulation(positive  array)
+[1 1 3 2 2] ans=[3]
+
+import java.util.*;
+class Main {
+   static int  unique(int arr[]){
+        int n=arr.length;
+       // int ans=0;
+        for(int i=0; i<n; i++){
+            for(int j=i+1; j<n; j++){
+                if(arr[i]==arr[j]){
+                    arr[i]=-1;
+                    arr[j]=-1;
+                    
+                }
+            }
+        }
+        int ans=-1;
+        for(int i=0; i<n; i++){
+            if(arr[i]>0){
+                ans=arr[i];            
+                
+            }
+        }
+        
+        return ans;
+        
+        
+    }
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int arr[]=new int [n];
+        for(int i=0; i<n; i++){
+            arr[i]=sc.nextInt();
+        }
+         
+         System.out.println(unique(arr));
+        
+    }
+}
+
+find second max element
+
+import java.util.*;
+class Main {
+   static int  findmax(int arr[]){
+       int mx=Integer.MIN_VALUE;
+       int n=arr.length;
+       // int ans=0;
+        for(int i=0; i<n; i++){
+                if(arr[i]>mx){
+                    mx=arr[i];
+                }
+                    }
+                    return mx;
+        }
+        static int  secondmax(int[]arr){
+            int n=arr.length;
+            int mx=findmax(arr);
+            for(int i=0; i<n; i++){
+                if(arr[i]==mx){
+                    arr[i]=Integer.MIN_VALUE;
+                }
+            }
+            int secondmax=findmax(arr);
+        
+     
+        
+        return secondmax;
+        
+        
+    }
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int arr[]=new int [n];
+        for(int i=0; i<n; i++){
+            arr[i]=sc.nextInt();
+        }
+         
+         System.out.println(secondmax(arr));
+        
+    }
+}
+
+First repeat value
+
+import java.util.*;
+class Main {
+   static int  firstrepeat(int arr[]){
+       
+       int n=arr.length;
+        int ans=-1;
+        for(int i=0; i<n; i++){
+            for(int j=i+1; j<n; j++){
+                if(arr[i]==arr[j]){
+                    return arr[i];
+                }
+            }
+              
+                   
+        }
+         return ans;
+        
+        
+   }
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int arr[]=new int [n];
+        for(int i=0; i<n; i++){
+            arr[i]=sc.nextInt();
+        }
+         
+         System.out.println(firstrepeat(arr));
+    }
+}
+
+solving practice question
+reverse integer
+1)1 2 3 4 5 = 5 4 3 2 1 
+creating a new array[]
+
+class Main {
+    static void print(int []arr){
+        for(int i=0; i<arr.length; i++){
+            System.out.print(arr[i]+" ");
+        }
+         System.out.println();
+    }
+    static int []reverse(int []arr){
+        int n=arr.length;
+        int []ans=new int [n];
+        int j=0;
+        for(int i=n-1; i>=0; i--){
+            ans[j++]=arr[i];    
+        }
+        return ans; 
+    }
+    public static void main(String[] args) {
+        int []arr={1,2,3,4,5};
+        int[] ans=reverse(arr);
+        print(ans);
+        
+        
+    }
+}
+
+Inplace approach (without creating new array)
+
+static void swapinarray(int []arr,int i,int j){
+ int temp=arr[i];
+    int arr[i]=arr[j];
+    int arr[j]=temp;
+}
+
+static void reverse(int []arr){
+    int i=0 ,int j=arr.length;
+     while(i<j){
+    swapinarray(arr,i,j);
+    i++;
+    j--;}
+ }
+
+
+rotate array by k steps k is non negative 
+k can be greater than n as well
+
+{1 2 3 4 5}
+
+import java.util.*;
+public class Main{
+static void print(int []arr){
+        for(int i=0; i<arr.length; i++){
+            System.out.print(arr[i]+" ");
+        }
+         System.out.println();
+    }
+
+static int [] rotate(int[] arr,int k){
+int n=arr.length;
+k=k%n;
+int [] ans=new int [n];
+int j=0;
+
+for(int i=n-k; i<n; i++){
+ans[j++]=arr[i];
+}
+for(int i=0; i<n-k; i++){
+ans[j++]=arr[i];
+}
+return ans;
+}
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+int n=sc.nextInt();
+int []arr=new int[n];
+for(int i=0; i<n; i++){
+arr[i]=sc.nextInt();
+}
+System.out.println("Enter k");
+int k=sc.nextInt();
+
+System.out.println("original array");
+print(arr);
+int[] ans=rotate(arr,k);
+System.out.println("array after rotation");
+print(ans);
+}
+}
+
+Same Question using inplace 
+
+import java.util.*;
+
+public class Main {
+
+    // Function to print the array
+    static void print(int []arr){
+        for(int i=0; i<arr.length; i++){
+            System.out.print(arr[i]+" ");
+        }
+         System.out.println();
+    }
+ 
+
+    // Helper function to reverse part of the array
+    static void reverse(int[] arr, int i, int j) {
+        while (i < j) {
+            swapInArray(arr, i, j);
+            i++;
+            j--;
+        }
+    }
+
+    // Swap function
+    static void swapInArray(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    // Function to rotate array in place
+    static int[] rotateInPlace(int[] arr, int k) {
+        int n = arr.length;
+        k = k % n;  // handle k > n
+        if (k == 0) return arr;
+
+        reverse(arr, 0, n - k - 1);
+        reverse(arr, n - k, n - 1);
+        reverse(arr, 0, n - 1);
+
+        return arr;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();              // Array size
+        int[] arr = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();         // Input elements
+        }
+
+        System.out.println("Enter k:");
+        int k = sc.nextInt();              // Rotation value
+
+        System.out.println("Original array:");
+        print(arr);
+
+        int[] ans = rotateInPlace(arr, k); // Rotate and return updated array
+
+        System.out.println("Array after rotation:");
+        print(ans);
+    }
+}
+
+
+Check the given integer is present or not
+value of all the elemnets in the array is less than 10 to the power 5
+
+
+import java.util.*;
+class Main{
+    static int[]frequency(int []arr){
+        int []freq=new int[100005];
+        for(int i=0;i<arr.length; i++){
+            freq[arr[i]]++;
+        }
+        return freq;
+    }
+    public static void main(String[]args){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter array size");
+        int n=sc.nextInt();
+        int []arr=new int[n];
+        System.out.println("Enter"+n+"elements");
+        for(int i=0; i<n; i++){
+            arr[i]=sc.nextInt();
+        }
+        int []freq=frequency(arr);
+        System.out.println("Enter number of quries");
+        int q=sc.nextInt();
+        while(q>0){
+            System.out.println("Enter number to search");
+            int x=sc.nextInt();
+            if(freq[x]>0){
+                System.out.println("Yes");
+            }
+            else{
+                System.out.println("No");
+            }
+            q--;
+        }
+    }
+}
+output :
+Enter array size
+5
+Enter5elements
+10 15 18 19 75
+Enter number of quries
+5
+Enter number to search
+18
+Yes
+Enter number to search
+18
+Yes
+Enter number to search
+18
+Yes
+Enter number to search
+75
+Yes
+Enter number to search
+53
+No
+
+=== Code Execution Successful ===
+            
+-------------------------------->Topic Two Pointers<---------------------------------------
+1) sort an array consisting of only 0s and 1s (without using array.sort)
+import java.util.*; (brute force approach)
+class Main{
+    static void print(int []arr){
+        int n=arr.length;
+        for(int i=0; i<n; i++){
+            System.out.print(arr[i]+" ");
+        }
+         System.out.println();
+    }
+    static void swap(int []arr,int i,int j){
+        int temp=arr[i];
+        arr[i]=arr[j];
+        arr[j]=temp;
+    }
+    static void sort(int[]arr){
+        int n=arr.length;
+        int zero=0;
+        for(int i=0; i<n; i++){
+            if(arr[i]==0){
+                zero++;
+            }
+        }
+        for(int i=0; i<n; i++){
+            if(i<zero){
+                arr[i]=0;
+            }
+            else{
+                arr[i]=1;
+            }
+        }
+    }
+    public static void main(String[]args){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter array size");
+        int n=sc.nextInt();
+        int []arr=new int[n];
+        System.out.println("Enter"+n+"elements");
+        for(int i=0; i<n; i++){
+            arr[i]=sc.nextInt();
+        }
+         System.out.println("original array");
+         print(arr);
+         sort(arr);
+          System.out.println("sorted array");
+          print(arr);
+        }
+    }
+
+
+***************************   using two pointer (left or right) (it is no more iterative )**
+import java.util.*;
+class Main{
+    static void print(int []arr){
+        int n=arr.length;
+        for(int i=0; i<n; i++){
+            System.out.print(arr[i]+" ");
+        }
+         System.out.println();
+    }
+    static void swap(int []arr,int i,int j){
+        int temp=arr[i];
+        arr[i]=arr[j];
+        arr[j]=temp;
+    }
+    static void sort(int[]arr){
+        int right=arr.length-1;
+        int left=0;
+        while(left<right){
+            if(arr[left]==1 && arr[right]==0){
+                swap(arr,left,right);
+                left++;
+                right--;
+            }
+            if(arr[left]==0){
+                left++;
+            }
+            if(arr[right]==1){
+                right--;
+            }
+        }
+        
+    }
+    public static void main(String[]args){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter array size");
+        int n=sc.nextInt();
+        int []arr=new int[n];
+        System.out.println("Enter"+n+"elements");
+        for(int i=0; i<n; i++){
+            arr[i]=sc.nextInt();
+        }
+         System.out.println("original array");
+         print(arr);
+         sort(arr);
+          System.out.println("sorted array");
+          print(arr);
+        }
+    }
+
+2) Given an array integers a move all the even integers at the begin and odd integer at end relative order does not matter
+
+ static void sort(int[]arr){
+        int right=arr.length-1;
+        int left=0;
+        while(left<right){
+            if(arr[left]%2==1 && arr[right]%2==0){
+                swap(arr,left,right);
+                left++;
+                right--;
+            }
+            if(arr[left]%2==0){
+                left++;
+            }
+            if(arr[right]%2==1){
+                right--;
+            }
+        }
+for even then odd series output [2 4 6 1 3 5]
+
+Given an integer array a sorted in non decreasing order return an array squares  of each number sorted in non decreasing order
+ non decreasing means (1 2 2 4)
+
+don't be use square and array.sort
+
+example [-10 ,-3 ,-1, 4 ,5] =[1 9 16 25 100]
+using absolute value abs(-x) =x
+abs(x)=x |x|
+this is code non decreasing order
+
+import java.util.*;
+class Main{
+    static void print(int []arr){
+        int n=arr.length;
+        for(int i=0; i<n; i++){
+            System.out.print(arr[i]+" ");
+        }
+         System.out.println();
+    }
+    
+ static void reverse(int[] arr) {
+     int i=0, j=arr.length-1;
+        while (i < j) {
+            swapInArray(arr, i, j);
+            i++;
+            j--;
+        }
+    }
+     static void swapInArray(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+
+ 
+    static int[] sortsquare(int[]arr){
+        int right=arr.length-1;
+        int left=0;
+        int n=arr.length;
+        int []ans=new int [n];
+        int k=0;
+        while(left<=right){
+            if(Math.abs(arr[left] )>Math.abs(arr[right])) {
+                ans[k++]=arr[left]*arr[left];
+                left++;
+                
+            } 
+            else{
+                ans[k++]=arr[right]*arr[right];
+                right--;
+            }
+        }
+     reverse(ans);
+    return ans;
+    }
+    public static void main(String[]args){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter array size");
+        int n=sc.nextInt();
+        int []arr=new int[n];
+        System.out.println("Enter"+n+"elements");
+        for(int i=0; i<n; i++){
+            arr[i]=sc.nextInt();
+        }
+         System.out.println("original array");
+         print(arr);
+         int []ans=sortsquare(arr);
+         
+         
+          System.out.println("sorted array");
+          
+          print(ans);
+        }
+    }
+
+
+<-----------------------------------Prefix Sum----------------------------->
+
+Given an integer a return the prefix sum
+ this is creating new array 
+import java.util.*;
+
+class Main {
+    static void print(int []arr){
+        int n=arr.length;
+        for(int i=0; i<n; i++){
+            System.out.print(arr[i]+" ");
+        }
+         System.out.println();
+    }
+
+
+    static int[] prefix(int[] arr) {
+        int n = arr.length;
+        int[] pref = new int[n];
+        pref[0] = arr[0];
+        for (int i = 1; i < n; i++) {
+            pref[i] = pref[i - 1] + arr[i];
+        }
+        return pref;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter array size:");
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Enter " + n + " elements:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        System.out.println("Input array:");
+        print(arr);
+
+        int[] pref = prefix(arr);
+        System.out.println("Prefix sum array:");
+        print(pref);
+    }
+}
+
+inplace array prefix sum
+
+static int[] prefix(int[] arr) {
+        int n = arr.length;
+        for (int i = 1; i < n; i++) {
+                 arr[i] = arr[i - 1] + arr[i];
+            
+        }
+        return arr;
+    }
+*** That it know neet any diffrenet    *** arr[i] = arr[i - 1] + arr[i]; ***
+
+Given an array of inetgers of size n. amswer q quries  where you need to print the sum of values in a given range of indices from l to r(l and r quries follow 1 based indexing)
+ 
+l=1,r=5 : pref[5] -p[0]
+l=2,r=6 : pref[6]-p[1]
+l=3,r=4 : pref[4]-p[2]
+l=5,r=5 : pref[5]-p[4]
+
+import java.util.*;
+
+class Main {
+    static void print(int []arr){
+        int n=arr.length;
+        for(int i=1; i<n; i++){
+            System.out.print(arr[i]+" ");
+        }
+         System.out.println();
+    }
+
+
+    static int[] prefix(int[] arr) {
+        int n = arr.length;
+        for (int i = 1; i < n; i++) {
+                 arr[i] = arr[i - 1] + arr[i];
+            
+        }
+        return arr;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter array size:");
+        int n = sc.nextInt();
+        int[] arr = new int[n+1];
+        System.out.println("Enter " + n + " elements:");
+        for (int i = 1; i <= n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        System.out.println("Input array:");
+        print(arr);
+********************************^^^^^^^^^^^^Same^^^^^^^^^^^^^^^^^^^^^
+**************************IMP***************************
+        int[] pref = prefix(arr);
+        System.out.println("Prefix sum array:");
+        print(pref);
+         System.out.println("number of quries");
+         int q=sc.nextInt();
+         while(q-->0){
+              System.out.println("enter range:");
+             int l=sc.nextInt();
+             int r=sc.nextInt();
+             int ans=arr[r]-arr[l-1];
+              System.out.println("sum"+ans);
+         }
+        
+    }
+}
+
+
+check if we can partition the array into two sub arrays with equal sum more formally check the that the prefix sum of a part of the array is equal to the suffix  sum of rest of the array 
+**** this is suffix sum example
+pref sum of index i = j=0 to i pref[i]=a [0]+a[1]+..a[i]
+suff sum of index i = j=1 to n-1 suff[i]=a[i]+arr[i+1]+..a[n-1 ][0]+a[1]+..a[i]
+
+[5 3 2] [6 3 1] part of subarray 
+
+import java.util.*;
+
+class Main {
+
+    static int findarray(int[] arr) {
+        int totalsum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            totalsum += arr[i];
+        }
+        return totalsum;
+    }
+
+    static boolean equalpart(int[] arr) {
+        int totalsum = findarray(arr);
+        int prefsum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            prefsum += arr[i];
+            int suffix = totalsum - prefsum;
+            if (suffix == prefsum) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter array size:");
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Enter " + n + " elements:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        boolean result = equalpart(arr);
+        System.out.println("Equal partition possible: " + result);
+    }
+}
+
+
+
+
+
+
+        
+    
+
